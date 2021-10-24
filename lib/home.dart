@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fooderlich/models/models.dart';
+import 'package:fooderlich/screens/explore_screen.dart';
 import 'components/components.dart';
 
 class Home extends StatefulWidget {
@@ -13,15 +14,7 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
 
   static List<Widget> pages = <Widget>[
-    Card1(
-        recipe: ExploreRecipe(
-            id: '1',
-            cardType: '1',
-            authorName: 'Ray Wenderlick',
-            title: 'The Art of Dough',
-            subtitle: 'Editor\'s Choice',
-            message: 'Learn to make the perfect bread.',
-            backgroundImage: 'assets/magazine_pics/mag1.png')),
+    ExploreScreen(),
     Card2(
         recipe: ExploreRecipe(
             id: '2',
@@ -73,11 +66,11 @@ class _HomeState extends State<Home> {
               Theme.of(context).textSelectionTheme.selectionColor,
           items: <BottomNavigationBarItem>[
             const BottomNavigationBarItem(
-                icon: Icon(Icons.card_giftcard), label: 'Card'),
+                icon: Icon(Icons.explore), label: 'Explore'),
             const BottomNavigationBarItem(
-                icon: Icon(Icons.card_giftcard), label: 'Card2'),
+                icon: Icon(Icons.book), label: 'Recipes'),
             const BottomNavigationBarItem(
-                icon: Icon(Icons.card_giftcard), label: 'Card3'),
+                icon: Icon(Icons.list), label: 'To Buy'),
           ],
           currentIndex: _selectedIndex,
           onTap: _onItemTapped),
