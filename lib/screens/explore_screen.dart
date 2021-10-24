@@ -15,6 +15,7 @@ class ExploreScreen extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<ExploreData> snapshot) {
           if (snapshot.hasData) {
             final recipes = snapshot.data!.todayRecipes;
+            final posts = snapshot.data!.friendPosts;
             return ListView(
               scrollDirection: Axis.vertical,
               children: [
@@ -22,11 +23,10 @@ class ExploreScreen extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                // TODO: Replace this with FriendPostListView
-                Container(
-                  height: 400,
-                  color: Colors.green,
-                )
+                FriendPostListView(friendPosts: posts),
+                const SizedBox(
+                  height: 16,
+                ),
               ],
             );
           } else {
