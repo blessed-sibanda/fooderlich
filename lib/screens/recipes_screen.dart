@@ -12,11 +12,9 @@ class RecipesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: mockService.getRecipes(),
-        builder: (context, snapshot) {
+        builder: (context, AsyncSnapshot<List<SimpleRecipe>> snapshot) {
           if (snapshot.hasData) {
-            return const Center(
-              child: Text('Recipes Screen'),
-            );
+            return RecipesGridView(recipes: snapshot.data!);
           } else {
             return const Center(
               child: CircularProgressIndicator(),
