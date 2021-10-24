@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fooderlich/card1.dart';
-import 'package:fooderlich/card2.dart';
-import 'package:fooderlich/card3.dart';
+import 'components/components.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
