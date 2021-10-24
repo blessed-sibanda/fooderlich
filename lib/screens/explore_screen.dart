@@ -15,7 +15,20 @@ class ExploreScreen extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<ExploreData> snapshot) {
           if (snapshot.hasData) {
             final recipes = snapshot.data!.todayRecipes;
-            return TodayRecipeListView(recipes: recipes);
+            return ListView(
+              scrollDirection: Axis.vertical,
+              children: [
+                TodayRecipeListView(recipes: recipes),
+                const SizedBox(
+                  height: 16,
+                ),
+                // TODO: Replace this with FriendPostListView
+                Container(
+                  height: 400,
+                  color: Colors.green,
+                )
+              ],
+            );
           } else {
             return const Center(
               child: CircularProgressIndicator(),
