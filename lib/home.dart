@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fooderlich/models/models.dart';
 import 'package:fooderlich/screens/explore_screen.dart';
+import 'package:fooderlich/screens/grocery_screen.dart';
 import 'package:fooderlich/screens/recipes_screen.dart';
-import 'components/components.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -17,24 +16,7 @@ class _HomeState extends State<Home> {
   static List<Widget> pages = <Widget>[
     ExploreScreen(),
     RecipesScreen(),
-    Card3(
-        recipe: ExploreRecipe(
-            id: '3',
-            cardType: '3',
-            title: 'Vegan Trends',
-            tags: [
-              'Healthy',
-              'Vegan',
-              'Carrots',
-              'Greens',
-              'Wheat',
-              'Pescetarian',
-              'Mint',
-              'Lemongrass',
-              'Salad',
-              'Water'
-            ],
-            backgroundImage: 'assets/magazine_pics/mag3.png')),
+    GroceryScreen()
   ];
 
   void _onItemTapped(int index) {
