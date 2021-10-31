@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fooderlich/fooderlich_theme.dart';
+import 'package:fooderlich/models/app_state_manager.dart';
 import 'package:fooderlich/models/grocery_manager.dart';
 import 'package:fooderlich/models/profile_manager.dart';
 import 'package:fooderlich/screens/splash_screen.dart';
@@ -19,7 +20,7 @@ class _FooderlichState extends State<Fooderlich> {
   final _groceryManager = GroceryManager();
   final _profileManager = ProfileManager();
 
-  // TODO: Create AppStateManager
+  final _appStateManager = AppStateManager();
   // TODO: Define AppRouter
 
   // TODO: Initialize app router
@@ -30,6 +31,7 @@ class _FooderlichState extends State<Fooderlich> {
       providers: [
         ChangeNotifierProvider(create: (context) => _profileManager),
         ChangeNotifierProvider(create: (context) => _groceryManager),
+        ChangeNotifierProvider(create: (context) => _appStateManager),
       ],
       child: Consumer<ProfileManager>(
         builder: (context, profileManager, child) {
