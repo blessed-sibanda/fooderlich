@@ -1,5 +1,5 @@
 name: fooderlich
-description: A new Flutter project.
+description: a social recipe app to keep track of new dishes, and share with friends.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -33,6 +33,8 @@ dependencies:
   flutter_colorpicker: ^0.4.0
   intl: ^0.17.0
   uuid: ^3.0.4
+  smooth_page_indicator: ^1.0.0+2
+  webview_flutter: ^2.0.13
 
 dev_dependencies:
   flutter_test:
