@@ -9,6 +9,7 @@ import 'package:fooderlich/screens/login_screen.dart';
 import 'package:fooderlich/screens/onboarding_screen.dart';
 import 'package:fooderlich/screens/profile_screen.dart';
 import 'package:fooderlich/screens/splash_screen.dart';
+import 'package:fooderlich/screens/webview_screen.dart';
 
 class AppRouter extends RouterDelegate
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
@@ -71,7 +72,7 @@ class AppRouter extends RouterDelegate
           ),
         if (profileManager.didSelectUser)
           ProfileScreen.page(profileManager.getUser),
-        // TODO: Add WebView Screen
+        if (profileManager.didTapOnRayWenderlich) WebViewScreen.page(),
       ],
     );
   }
@@ -93,7 +94,10 @@ class AppRouter extends RouterDelegate
       profileManager.tapOnProfile(false);
     }
 
-    // TODO: Handle state when user closes WebView sceen
+    if (route.settings.name == FooderlichPages.raywenderlich) {
+      profileManager.tapOnRayWenderlich(false);
+    }
+
     return true;
   }
 
