@@ -35,6 +35,8 @@ dependencies:
   uuid: ^3.0.4
   smooth_page_indicator: ^1.0.0+2
   webview_flutter: ^2.0.13
+  url_launcher: ^6.0.4
+  shared_preferences: ^2.0.5
 
 dev_dependencies:
   flutter_test:
