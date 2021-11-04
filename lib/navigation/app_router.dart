@@ -3,6 +3,7 @@ import 'package:fooderlich/models/app_state_manager.dart';
 import 'package:fooderlich/models/fooderlich_pages.dart';
 import 'package:fooderlich/models/grocery_manager.dart';
 import 'package:fooderlich/models/profile_manager.dart';
+import 'package:fooderlich/navigation/app_link.dart';
 import 'package:fooderlich/screens/grocery_item_screen.dart';
 import 'package:fooderlich/screens/home.dart';
 import 'package:fooderlich/screens/login_screen.dart';
@@ -11,7 +12,7 @@ import 'package:fooderlich/screens/profile_screen.dart';
 import 'package:fooderlich/screens/splash_screen.dart';
 import 'package:fooderlich/screens/webview_screen.dart';
 
-class AppRouter extends RouterDelegate
+class AppRouter extends RouterDelegate<AppLink>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
   @override
   final GlobalKey<NavigatorState> navigatorKey;
@@ -101,8 +102,49 @@ class AppRouter extends RouterDelegate
     return true;
   }
 
+  AppLink getCurrentPath() {
+    if (!appStateManager.isLoggedIn) {
+      return AppLink(location: AppLink.kLoginPath);
+    } else if (!appStateManager.isOnBoardingComplete) {
+      return AppLink(location: AppLink.kOnboardingPath);
+    } else if (profileManager.didSelectUser) {
+      return AppLink(location: AppLink.kProfilePath);
+    } else if (groceryManager.isCreatingNewItem) {
+      return AppLink(location: AppLink.kItemPath);
+    } else if (groceryManager.selectedGroceryItem != null) {
+      final id = groceryManager.selectedGroceryItem!.id;
+      return AppLink(location: AppLink.kItemPath, itemId: id);
+    } else {
+      return AppLink(
+          location: AppLink.kHomePath,
+          currentTab: appStateManager.getSelectedTab);
+    }
+  }
+
   @override
-  Future<void> setNewRoutePath(configuration) async {
-    return null;
+  AppLink get currentConfiguration => getCurrentPath();
+
+  @override
+  Future<void> setNewRoutePath(AppLink newLink) async {
+    switch (newLink.location) {
+      case AppLink.kProfilePath:
+        profileManager.tapOnProfile(true);
+        break;
+      case AppLink.kItemPath:
+        if (newLink.itemId != null) {
+          groceryManager.setSelectedGroceryItem(newLink.itemId!);
+        } else {
+          groceryManager.createNewItem();
+        }
+        profileManager.tapOnProfile(false);
+        break;
+      case AppLink.kHomePath:
+        appStateManager.goToTab(newLink.currentTab ?? 0);
+        profileManager.tapOnProfile(false);
+        groceryManager.groceryItemTapped(-1);
+        break;
+      default:
+        break;
+    }
   }
 }
