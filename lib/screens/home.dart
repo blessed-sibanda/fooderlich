@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'explore_screen.dart';
 import 'grocery_screen.dart';
 import 'recipes_screen.dart';
+import '../models/profile_manager.dart';
 
 class Home extends StatefulWidget {
   final int currentTab;
@@ -75,7 +76,8 @@ class _HomeState extends State<Home> {
             backgroundImage: AssetImage('assets/profile_pics/person_joe.jpeg'),
           ),
           onTap: () {
-            //  TODO: home -> profile
+            Provider.of<ProfileManager>(context, listen: false)
+                .tapOnProfile(true);
           },
         ));
   }

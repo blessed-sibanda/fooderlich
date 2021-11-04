@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:fooderlich/models/fooderlich_pages.dart';
 import 'package:fooderlich/models/profile_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:fooderlich/components/circle_image.dart';
 import 'package:fooderlich/models/user.dart';
 
 class ProfileScreen extends StatefulWidget {
-  // TODO: ProfileScreen MaterialPage Helper
+  static MaterialPage page(User user) {
+    return MaterialPage(
+        child: ProfileScreen(user: user),
+        name: FooderlichPages.profilePath,
+        key: ValueKey(FooderlichPages.profilePath));
+  }
 
   final User user;
   const ProfileScreen({Key? key, required this.user}) : super(key: key);
@@ -21,7 +27,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              // TODO: Close Profile Screen
+              Provider.of<ProfileManager>(context, listen: false)
+                  .tapOnProfile(false);
             },
             icon: const Icon(Icons.close)),
       ),

@@ -18,7 +18,7 @@ class ProfileManager extends ChangeNotifier {
   bool get darkMode => _darkMode;
   bool get didTapOnRayWenderlich => _tapOnRayWenderlich;
 
-  void set darkMode(bool darkMode) {
+  set darkMode(bool darkMode) {
     _darkMode = darkMode;
     notifyListeners();
   }
