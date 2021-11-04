@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fooderlich/models/tab_manager.dart';
+import 'package:fooderlich/models/app_state_manager.dart';
 import 'package:provider/provider.dart';
 
 class EmptyGroceryScreen extends StatelessWidget {
@@ -32,7 +32,8 @@ class EmptyGroceryScreen extends StatelessWidget {
             ),
             MaterialButton(
               onPressed: () {
-                Provider.of<TabManager>(context, listen: false).goToRecipes();
+                Provider.of<AppStateManager>(context, listen: false)
+                    .goToRecipes();
               },
               textColor: Colors.white,
               child: const Text('Browse Recipes'),

@@ -3,7 +3,7 @@ import 'package:fooderlich/fooderlich_theme.dart';
 import 'package:fooderlich/models/app_state_manager.dart';
 import 'package:fooderlich/models/grocery_manager.dart';
 import 'package:fooderlich/models/profile_manager.dart';
-import 'package:fooderlich/screens/splash_screen.dart';
+import 'package:fooderlich/navigation/app_router.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -21,9 +21,16 @@ class _FooderlichState extends State<Fooderlich> {
   final _profileManager = ProfileManager();
 
   final _appStateManager = AppStateManager();
-  // TODO: Define AppRouter
+  late AppRouter _appRouter;
 
-  // TODO: Initialize app router
+  @override
+  void initState() {
+    _appRouter = AppRouter(
+        appStateManager: _appStateManager,
+        groceryManager: _groceryManager,
+        profileManager: _profileManager);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +52,10 @@ class _FooderlichState extends State<Fooderlich> {
           return MaterialApp(
             theme: theme,
             title: 'Fooderlich',
-            // TODO: Replace with Router Widget
-            home: const SplashScreen(),
+            home: Router(
+              routerDelegate: _appRouter,
+              // TODO: Add backButtonDispatcher
+            ),
           );
         },
       ),
